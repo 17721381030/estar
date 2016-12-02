@@ -1,0 +1,12 @@
+
+.configure_content{height:100%; margin-left:6px; margin-right:2px; color:#2f2f2f; font-size:15px;margin-top:30px;}
+.configure_detail_content{height:100%; margin-left:6px; margin-right:2px; color:#2f2f2f; font-size:15px; margin-top:30px;}
+.configure_content table td{ background:#f9fbff; height:45px;  line-height:45px; text-indent:20px; }
+.configure_detail_content table td{ background:#f9fbff; height:45px;  line-height:45px; text-indent:20px; }
+.kep1_span{ float:right; margin-right:20px; display:inline; font-size:14px;  text-align:center;}
+.kep1 a{ width:104px;text-indent:0px; height:25px; display:block; margin-top:9px; background:#f0f4ff; line-height:25px; border:1px solid #dbe3fb;color:#0e7d93;}
+.ketable2{ font-size:15px; text-indent:0px;}
+.ketable2_span{ margin-right:18px; float:right; display:inline;}
+.ketable2 span a{ margin-left:500px;}
+.pei2a span{ float:right; }
+.pei2a span a{ color:#36b0c8; margin:0 40px;}

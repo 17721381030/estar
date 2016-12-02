@@ -1,0 +1,497 @@
+package com.estar.judgment.evaluation.web.law.dto;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import com.estar.judgment.appealjudgment.JudgmentCheckError;
+import com.estar.judgment.appliedlaw.AppliedLawException;
+import com.estar.judgment.content.JudgmentContent;
+import com.estar.judgment.evaluation.JudgmentInfo;
+import com.estar.judgment.util.exception.InvalidJudgmentReportException;
+import com.estar.judgment.util.message.MessageType;
+
+public class AnalysisArticleReportDTO {
+
+	private static final long serialVersionUID = 1L;
+
+	private List<ArticleReportDTO> court;//("法院"),
+	private List<ArticleReportDTO> type;//("文书类型"),
+	private List<ArticleReportDTO> case_number;//("案号"),
+	private List<ArticleReportDTO> plaintiff;//("原告"),
+	private List<ArticleReportDTO> defendant;//("被告"),
+	private List<ArticleReportDTO> third_party;//("第三人"),
+	//private List<ArticleReportDTO> cause;//("案由"),
+	private List<ArticleReportDTO> cause_content;//("案由和经过"),
+	private List<ArticleReportDTO> plaintiff_claims;//("原告陈述"),
+	private List<ArticleReportDTO> appeal;//("诉求"),
+	private List<ArticleReportDTO> plaintiff_quote;//("原告举证"),
+	private List<ArticleReportDTO> answer;//("被告答辩"),
+	private List<ArticleReportDTO> reason;//("理由"),
+	private List<ArticleReportDTO> law_article;//("法律条文"),
+	private List<ArticleReportDTO> judgment_description;//("判决说明文"),
+	private List<ArticleReportDTO> judgment_content;//("判决"),
+	private List<ArticleReportDTO> rights_obligations;//("诉讼权利义务告知"),
+	private List<ArticleReportDTO> trial_group;//("审判组织"),
+	private List<ArticleReportDTO> appendix_law_article;//("附相关法律条文");
+	
+	private String court_name;//("法院"),
+	private String type_name;//("文书类型"),
+	private String case_number_name;//("案号"),
+	private String plaintiff_name;//("原告"),
+	private String defendant_name;//("被告"),
+	private String third_party_name;//("第三人"),
+	//private String cause_name;//("案由"),
+	private String cause_content_name;//("案由和经过"),
+	private String plaintiff_claims_name;//("原告陈述"),
+	private String appeal_name;//("诉求"),
+	private String plaintiff_quote_name;//("原告举证"),
+	private String answer_name;//("被告答辩"),
+	private String reason_name;//("理由"),
+	private String law_article_name;//("法律条文"),
+	private String judgment_description_name;//("判决说明文"),
+	private String judgment_content_name;//("判决"),
+	private String rights_obligations_name;//("诉讼权利义务告知"),
+	private String trial_group_name;//("审判组织"),
+	private String appendix_law_article_name;//("附相关法律条文");
+	private String appeal_check_name;//("回应诉求"),
+	private String law_article_check_name;//("法条适用"),
+	private String judgment_check_name;//("判决内容");
+	
+	
+	private List<ArticleReportDTO> appeal_check;//("回应诉求"),
+	private List<ArticleReportDTO> law_article_check;//("法条适用"),
+	private List<ArticleReportDTO> judgment_check;//("判决内容");
+	
+	private List<ArticleReportDTO> exception2ArticleReportDTO(List<InvalidJudgmentReportException> eList){
+		List<ArticleReportDTO> list = new ArrayList<ArticleReportDTO>();
+		if(null != eList && eList.size() > 0){
+			for(Object e : eList){
+				if(e instanceof AppliedLawException){
+					AppliedLawException obj = (AppliedLawException)e;
+					if(MessageType.INFORMATION != obj.getUserDefinedType()){
+						list.add(new ArticleReportDTO(obj));
+					}
+				}else if(e instanceof JudgmentCheckError){
+					JudgmentCheckError obj = (JudgmentCheckError)e;
+					if(MessageType.INFORMATION != obj.getUserDefinedType()){
+						list.add(new ArticleReportDTO(obj));
+					}
+				}else if(e instanceof InvalidJudgmentReportException){
+					InvalidJudgmentReportException obj = (InvalidJudgmentReportException)e;
+					if(MessageType.INFORMATION != obj.getUserDefinedType()){
+						list.add(new ArticleReportDTO(obj));
+					}
+				}
+			}
+		}
+		return list;
+	}
+	public AnalysisArticleReportDTO() {
+		super();
+	}
+	
+	public AnalysisArticleReportDTO(JudgmentInfo info) {
+		//法院
+		this.court = exception2ArticleReportDTO(info.getJudgmentExceptonsByJudgmentContent(JudgmentContent.COURT));
+		//类型
+		this.type = exception2ArticleReportDTO(info.getJudgmentExceptonsByJudgmentContent(JudgmentContent.TYPE));
+		
+		//案号
+		this.case_number = exception2ArticleReportDTO(info.getJudgmentExceptonsByJudgmentContent(JudgmentContent.CASE_NUMBER));
+		this.case_number.addAll(exception2ArticleReportDTO(info.getJudgmentExceptonsByJudgmentContent(JudgmentContent.YEAR)));
+		this.case_number.addAll(exception2ArticleReportDTO(info.getJudgmentExceptonsByJudgmentContent(JudgmentContent.COURT_ABBR)));
+		this.case_number.addAll(exception2ArticleReportDTO(info.getJudgmentExceptonsByJudgmentContent(JudgmentContent.COURTROOM_ABBR)));
+		this.case_number.addAll(exception2ArticleReportDTO(info.getJudgmentExceptonsByJudgmentContent(JudgmentContent.COURT_COURTROOM)));
+		this.case_number.addAll(exception2ArticleReportDTO(info.getJudgmentExceptonsByJudgmentContent(JudgmentContent.PROPERTY)));
+		this.case_number.addAll(exception2ArticleReportDTO(info.getJudgmentExceptonsByJudgmentContent(JudgmentContent.JUDICIAL_PROCEDURE)));
+		this.case_number.addAll(exception2ArticleReportDTO(info.getJudgmentExceptonsByJudgmentContent(JudgmentContent.NUMBER)));
+		
+		
+		
+		//原告
+		this.plaintiff = exception2ArticleReportDTO(info.getJudgmentExceptonsByJudgmentContent(JudgmentContent.PLAINTIFF));
+		this.plaintiff.addAll(exception2ArticleReportDTO(info.getJudgmentExceptonsByJudgmentContent(JudgmentContent.PLAINTIFF_PARTY)));
+		this.plaintiff.addAll(exception2ArticleReportDTO(info.getJudgmentExceptonsByJudgmentContent(JudgmentContent.PLAINTIFF_NAME)));
+		this.plaintiff.addAll(exception2ArticleReportDTO(info.getJudgmentExceptonsByJudgmentContent(JudgmentContent.PLAINTIFF_ADDRESS)));
+		this.plaintiff.addAll(exception2ArticleReportDTO(info.getJudgmentExceptonsByJudgmentContent(JudgmentContent.PLAINTIFF_GENDER)));
+		this.plaintiff.addAll(exception2ArticleReportDTO(info.getJudgmentExceptonsByJudgmentContent(JudgmentContent.PLAINTIFF_BIRTHDAY)));
+		this.plaintiff.addAll(exception2ArticleReportDTO(info.getJudgmentExceptonsByJudgmentContent(JudgmentContent.PLAINTIFF_NATIONALITY)));
+		
+		
+		this.plaintiff.addAll(exception2ArticleReportDTO(info.getJudgmentExceptonsByJudgmentContent(JudgmentContent.PLAINTIFF_LEGAL_REPRESENTATIVE)));
+		this.plaintiff.addAll(exception2ArticleReportDTO(info.getJudgmentExceptonsByJudgmentContent(JudgmentContent.PLAINTIFF_LEGAL_REPRESENTATIVE_NAME)));
+		this.plaintiff.addAll(exception2ArticleReportDTO(info.getJudgmentExceptonsByJudgmentContent(JudgmentContent.PLAINTIFF_LEGAL_REPRESENTATIVE_POSITION)));
+		this.plaintiff.addAll(exception2ArticleReportDTO(info.getJudgmentExceptonsByJudgmentContent(JudgmentContent.PLAINTIFF_ENTRUSTED_AGENT)));
+		this.plaintiff.addAll(exception2ArticleReportDTO(info.getJudgmentExceptonsByJudgmentContent(JudgmentContent.PLAINTIFF_ENTRUSTED_AGENT_NAME)));
+		this.plaintiff.addAll(exception2ArticleReportDTO(info.getJudgmentExceptonsByJudgmentContent(JudgmentContent.PLAINTIFF_ENTRUSTED_AGENT_UNIT)));
+		this.plaintiff.addAll(exception2ArticleReportDTO(info.getJudgmentExceptonsByJudgmentContent(JudgmentContent.PLAINTIFF_ENTRUSTED_AGENT_POSITION)));
+		
+		
+		//被告
+		this.defendant = exception2ArticleReportDTO(info.getJudgmentExceptonsByJudgmentContent(JudgmentContent.DEFENDANT));
+		this.defendant.addAll(exception2ArticleReportDTO(info.getJudgmentExceptonsByJudgmentContent(JudgmentContent.DEFENDANT_PARTY)));
+		this.defendant.addAll(exception2ArticleReportDTO(info.getJudgmentExceptonsByJudgmentContent(JudgmentContent.DEFENDANT_NAME)));
+		this.defendant.addAll(exception2ArticleReportDTO(info.getJudgmentExceptonsByJudgmentContent(JudgmentContent.DEFENDANT_ADDRESS)));
+		this.defendant.addAll(exception2ArticleReportDTO(info.getJudgmentExceptonsByJudgmentContent(JudgmentContent.DEFENDANT_GENDER)));
+		this.defendant.addAll(exception2ArticleReportDTO(info.getJudgmentExceptonsByJudgmentContent(JudgmentContent.DEFENDANT_BIRTHDAY)));
+		this.defendant.addAll(exception2ArticleReportDTO(info.getJudgmentExceptonsByJudgmentContent(JudgmentContent.DEFENDANT_NATIONALITY)));
+		
+		this.defendant.addAll(exception2ArticleReportDTO(info.getJudgmentExceptonsByJudgmentContent(JudgmentContent.DEFENDANT_LEGAL_REPRESENTATIVE)));
+		this.defendant.addAll(exception2ArticleReportDTO(info.getJudgmentExceptonsByJudgmentContent(JudgmentContent.DEFENDANT_LEGAL_REPRESENTATIVE_NAME)));
+		this.defendant.addAll(exception2ArticleReportDTO(info.getJudgmentExceptonsByJudgmentContent(JudgmentContent.DEFENDANT_LEGAL_REPRESENTATIVE_POSITION)));
+		this.defendant.addAll(exception2ArticleReportDTO(info.getJudgmentExceptonsByJudgmentContent(JudgmentContent.DEFENDANT_ENTRUSTED_AGENT)));
+		this.defendant.addAll(exception2ArticleReportDTO(info.getJudgmentExceptonsByJudgmentContent(JudgmentContent.DEFENDANT_ENTRUSTED_AGENT_NAME)));
+		this.defendant.addAll(exception2ArticleReportDTO(info.getJudgmentExceptonsByJudgmentContent(JudgmentContent.DEFENDANT_ENTRUSTED_AGENT_UNIT)));
+		this.defendant.addAll(exception2ArticleReportDTO(info.getJudgmentExceptonsByJudgmentContent(JudgmentContent.DEFENDANT_ENTRUSTED_AGENT_POSITION)));
+		
+		
+		
+		this.third_party = exception2ArticleReportDTO(info.getJudgmentExceptonsByJudgmentContent(JudgmentContent.THIRD_PARTY));
+		this.third_party.addAll(exception2ArticleReportDTO(info.getJudgmentExceptonsByJudgmentContent(JudgmentContent.THIRD_PARTY_PARTY)));
+		this.third_party.addAll(exception2ArticleReportDTO(info.getJudgmentExceptonsByJudgmentContent(JudgmentContent.THIRD_PARTY_NAME)));
+		this.third_party.addAll(exception2ArticleReportDTO(info.getJudgmentExceptonsByJudgmentContent(JudgmentContent.THIRD_PARTY_ADDRESS)));
+		this.third_party.addAll(exception2ArticleReportDTO(info.getJudgmentExceptonsByJudgmentContent(JudgmentContent.THIRD_PARTY_GENDER)));
+		this.third_party.addAll(exception2ArticleReportDTO(info.getJudgmentExceptonsByJudgmentContent(JudgmentContent.THIRD_PARTY_BIRTHDAY)));
+		this.third_party.addAll(exception2ArticleReportDTO(info.getJudgmentExceptonsByJudgmentContent(JudgmentContent.THIRD_PARTY_NATIONALITY)));
+		
+		this.third_party.addAll(exception2ArticleReportDTO(info.getJudgmentExceptonsByJudgmentContent(JudgmentContent.THIRD_PARTY_LEGAL_REPRESENTATIVE)));
+		this.third_party.addAll(exception2ArticleReportDTO(info.getJudgmentExceptonsByJudgmentContent(JudgmentContent.THIRD_PARTY_LEGAL_REPRESENTATIVE_NAME)));
+		this.third_party.addAll(exception2ArticleReportDTO(info.getJudgmentExceptonsByJudgmentContent(JudgmentContent.THIRD_PARTY_LEGAL_REPRESENTATIVE_POSITION)));
+		this.third_party.addAll(exception2ArticleReportDTO(info.getJudgmentExceptonsByJudgmentContent(JudgmentContent.THIRD_PARTY_ENTRUSTED_AGENT)));
+		this.third_party.addAll(exception2ArticleReportDTO(info.getJudgmentExceptonsByJudgmentContent(JudgmentContent.THIRD_PARTY_ENTRUSTED_AGENT_NAME)));
+		this.third_party.addAll(exception2ArticleReportDTO(info.getJudgmentExceptonsByJudgmentContent(JudgmentContent.THIRD_PARTY_ENTRUSTED_AGENT_UNIT)));
+		this.third_party.addAll(exception2ArticleReportDTO(info.getJudgmentExceptonsByJudgmentContent(JudgmentContent.THIRD_PARTY_ENTRUSTED_AGENT_POSITION)));
+		
+		
+		
+		this.cause_content = exception2ArticleReportDTO(info.getJudgmentExceptonsByJudgmentContent(JudgmentContent.CAUSE_CONTENT));
+		this.cause_content.addAll(exception2ArticleReportDTO(info.getJudgmentExceptonsByJudgmentContent(JudgmentContent.ACCEPT_DATE)));
+		this.cause_content.addAll(exception2ArticleReportDTO(info.getJudgmentExceptonsByJudgmentContent(JudgmentContent.TRIAL_PROCEDURE)));
+		this.cause_content.addAll(exception2ArticleReportDTO(info.getJudgmentExceptonsByJudgmentContent(JudgmentContent.COLLEGIAL_PANEL)));
+		this.cause_content.addAll(exception2ArticleReportDTO(info.getJudgmentExceptonsByJudgmentContent(JudgmentContent.TRIAL_DATE)));
+		this.cause_content.addAll(exception2ArticleReportDTO(info.getJudgmentExceptonsByJudgmentContent(JudgmentContent.PUBLIC_TRIAL)));
+		this.cause_content.addAll(exception2ArticleReportDTO(info.getJudgmentExceptonsByJudgmentContent(JudgmentContent.DEFAULT_JUDGMENT)));
+		this.cause_content.addAll(exception2ArticleReportDTO(info.getJudgmentExceptonsByJudgmentContent(JudgmentContent.COUNTER_CLAIM)));
+		
+		
+		this.plaintiff_claims = exception2ArticleReportDTO(info.getJudgmentExceptonsByJudgmentContent(JudgmentContent.PLAINTIFF_CLAIMS));
+		this.appeal = exception2ArticleReportDTO(info.getJudgmentExceptonsByJudgmentContent(JudgmentContent.APPEAL));
+		this.plaintiff_quote = exception2ArticleReportDTO(info.getJudgmentExceptonsByJudgmentContent(JudgmentContent.PLAINTIFF_QUOTE));
+		this.answer = exception2ArticleReportDTO(info.getJudgmentExceptonsByJudgmentContent(JudgmentContent.ANSWER));
+		this.reason = exception2ArticleReportDTO(info.getJudgmentExceptonsByJudgmentContent(JudgmentContent.REASON));
+		this.law_article = exception2ArticleReportDTO(info.getJudgmentExceptonsByJudgmentContent(JudgmentContent.LAW_ARTICLE));
+		this.judgment_description = exception2ArticleReportDTO(info.getJudgmentExceptonsByJudgmentContent(JudgmentContent.JUDGMENT_DESCRIPTION));
+		
+		this.judgment_content = exception2ArticleReportDTO(info.getJudgmentExceptonsByJudgmentContent(JudgmentContent.JUDGMENT_CONTENT));
+		this.judgment_content.addAll(exception2ArticleReportDTO(info.getJudgmentExceptonsByJudgmentContent(JudgmentContent.JUDGMENT_PARTY_NAME)));
+		this.judgment_content.addAll(exception2ArticleReportDTO(info.getJudgmentExceptonsByJudgmentContent(JudgmentContent.FEE)));
+		this.judgment_content.addAll(exception2ArticleReportDTO(info.getJudgmentExceptonsByJudgmentContent(JudgmentContent.FEE_BURDEN)));
+		this.judgment_content.addAll(exception2ArticleReportDTO(info.getJudgmentExceptonsByJudgmentContent(JudgmentContent.ANNOUNCEMENT)));
+		this.judgment_content.addAll(exception2ArticleReportDTO(info.getJudgmentExceptonsByJudgmentContent(JudgmentContent.PRESERVATION)));
+		this.judgment_content.addAll(exception2ArticleReportDTO(info.getJudgmentExceptonsByJudgmentContent(JudgmentContent.APPRAISAL)));
+		
+		this.rights_obligations = exception2ArticleReportDTO(info.getJudgmentExceptonsByJudgmentContent(JudgmentContent.RIGHTS_OBLIGATIONS));
+		this.rights_obligations.addAll(exception2ArticleReportDTO(info.getJudgmentExceptonsByJudgmentContent(JudgmentContent.APPEAL_COURT)));
+		
+		this.trial_group = exception2ArticleReportDTO(info.getJudgmentExceptonsByJudgmentContent(JudgmentContent.TRIAL_GROUP_DATE));
+		this.trial_group.addAll(exception2ArticleReportDTO(info.getJudgmentExceptonsByJudgmentContent(JudgmentContent.PRESIDING_JUDGE)));
+		this.trial_group.addAll(exception2ArticleReportDTO(info.getJudgmentExceptonsByJudgmentContent(JudgmentContent.JUDGE)));
+		this.trial_group.addAll(exception2ArticleReportDTO(info.getJudgmentExceptonsByJudgmentContent(JudgmentContent.JUDGMENT_DATE)));
+		this.trial_group.addAll(exception2ArticleReportDTO(info.getJudgmentExceptonsByJudgmentContent(JudgmentContent.COURT_CLERK)));
+		
+		this.appendix_law_article = exception2ArticleReportDTO(info.getJudgmentExceptonsByJudgmentContent(JudgmentContent.APPENDIX_LAW_ARTICLE));
+		
+		this.appeal_check = exception2ArticleReportDTO(info.getJudgmentExceptonsByJudgmentContent(JudgmentContent.APPEAL_CHECK));
+		this.law_article_check = exception2ArticleReportDTO(info.getJudgmentExceptonsByJudgmentContent(JudgmentContent.LAW_ARTICLE_CHECK));
+		this.judgment_check = exception2ArticleReportDTO(info.getJudgmentExceptonsByJudgmentContent(JudgmentContent.JUDGMENT_CHECK));
+		
+		this.court_name = JudgmentContent.COURT.getName();
+		this.type_name = JudgmentContent.TYPE.getName();
+		this.case_number_name = JudgmentContent.CASE_NUMBER.getName();
+		this.plaintiff_name = JudgmentContent.PLAINTIFF.getName();
+		this.defendant_name = JudgmentContent.DEFENDANT.getName();
+		this.third_party_name = JudgmentContent.THIRD_PARTY.getName();
+		//this.cause_name = JudgmentContent.CAUSE.getName(); TODO  2015.03.26记录，超过20天后未接触注释，删除本行代码
+		this.cause_content_name = JudgmentContent.CAUSE_CONTENT.getName();
+		this.plaintiff_claims_name = JudgmentContent.PLAINTIFF_CLAIMS.getName();
+		this.appeal_name = JudgmentContent.APPEAL.getName();
+		this.plaintiff_quote_name = JudgmentContent.PLAINTIFF_QUOTE.getName();
+		this.answer_name = JudgmentContent.ANSWER.getName();
+		this.reason_name = JudgmentContent.REASON.getName();
+		this.law_article_name = JudgmentContent.LAW_ARTICLE.getName();
+		this.judgment_description_name = JudgmentContent.JUDGMENT_DESCRIPTION.getName();
+		this.judgment_content_name = JudgmentContent.JUDGMENT_CONTENT.getName();
+		this.rights_obligations_name = JudgmentContent.RIGHTS_OBLIGATIONS.getName();
+		this.trial_group_name = JudgmentContent.TRIAL_GROUP_DATE.getName();
+		this.appendix_law_article_name = JudgmentContent.APPENDIX_LAW_ARTICLE.getName();
+		this.appeal_check_name	= JudgmentContent.APPEAL_CHECK.getName();
+		this.law_article_check_name =JudgmentContent.LAW_ARTICLE_CHECK.getName();
+		this.judgment_check_name = JudgmentContent.JUDGMENT_CHECK.getName();
+	}
+	
+	public List<ArticleReportDTO> getCourt() {
+		return court;
+	}
+	public void setCourt(List<ArticleReportDTO> court) {
+		this.court = court;
+	}
+	public List<ArticleReportDTO> getType() {
+		return type;
+	}
+	public void setType(List<ArticleReportDTO> type) {
+		this.type = type;
+	}
+	public List<ArticleReportDTO> getCase_number() {
+		return case_number;
+	}
+	public void setCase_number(List<ArticleReportDTO> case_number) {
+		this.case_number = case_number;
+	}
+	public List<ArticleReportDTO> getPlaintiff() {
+		return plaintiff;
+	}
+	public void setPlaintiff(List<ArticleReportDTO> plaintiff) {
+		this.plaintiff = plaintiff;
+	}
+	public List<ArticleReportDTO> getDefendant() {
+		return defendant;
+	}
+	public void setDefendant(List<ArticleReportDTO> defendant) {
+		this.defendant = defendant;
+	}
+	public List<ArticleReportDTO> getThird_party() {
+		return third_party;
+	}
+	public void setThird_party(List<ArticleReportDTO> third_party) {
+		this.third_party = third_party;
+	}
+//	public List<ArticleReportDTO> getCause() {
+//		return cause;
+//	}
+//	public void setCause(List<ArticleReportDTO> cause) {
+//		this.cause = cause;
+//	}
+	public List<ArticleReportDTO> getCause_content() {
+		return cause_content;
+	}
+	public void setCause_content(List<ArticleReportDTO> cause_content) {
+		this.cause_content = cause_content;
+	}
+	public List<ArticleReportDTO> getPlaintiff_claims() {
+		return plaintiff_claims;
+	}
+	public void setPlaintiff_claims(List<ArticleReportDTO> plaintiff_claims) {
+		this.plaintiff_claims = plaintiff_claims;
+	}
+	public List<ArticleReportDTO> getAppeal() {
+		return appeal;
+	}
+	public void setAppeal(List<ArticleReportDTO> appeal) {
+		this.appeal = appeal;
+	}
+	public List<ArticleReportDTO> getPlaintiff_quote() {
+		return plaintiff_quote;
+	}
+	public void setPlaintiff_quote(List<ArticleReportDTO> plaintiff_quote) {
+		this.plaintiff_quote = plaintiff_quote;
+	}
+	public List<ArticleReportDTO> getAnswer() {
+		return answer;
+	}
+	public void setAnswer(List<ArticleReportDTO> answer) {
+		this.answer = answer;
+	}
+	public List<ArticleReportDTO> getReason() {
+		return reason;
+	}
+	public void setReason(List<ArticleReportDTO> reason) {
+		this.reason = reason;
+	}
+	public List<ArticleReportDTO> getLaw_article() {
+		return law_article;
+	}
+	public void setLaw_article(List<ArticleReportDTO> law_article) {
+		this.law_article = law_article;
+	}
+	public List<ArticleReportDTO> getJudgment_description() {
+		return judgment_description;
+	}
+	public void setJudgment_description(List<ArticleReportDTO> judgment_description) {
+		this.judgment_description = judgment_description;
+	}
+	public List<ArticleReportDTO> getJudgment_content() {
+		return judgment_content;
+	}
+	public void setJudgment_content(List<ArticleReportDTO> judgment_content) {
+		this.judgment_content = judgment_content;
+	}
+	public List<ArticleReportDTO> getRights_obligations() {
+		return rights_obligations;
+	}
+	public void setRights_obligations(List<ArticleReportDTO> rights_obligations) {
+		this.rights_obligations = rights_obligations;
+	}
+	public List<ArticleReportDTO> getTrial_group() {
+		return trial_group;
+	}
+	public void setTrial_group(List<ArticleReportDTO> trial_group) {
+		this.trial_group = trial_group;
+	}
+	public List<ArticleReportDTO> getAppendix_law_article() {
+		return appendix_law_article;
+	}
+	public void setAppendix_law_article(List<ArticleReportDTO> appendix_law_article) {
+		this.appendix_law_article = appendix_law_article;
+	}
+	public List<ArticleReportDTO> getAppeal_check() {
+		return appeal_check;
+	}
+	public void setAppeal_check(List<ArticleReportDTO> appeal_check) {
+		this.appeal_check = appeal_check;
+	}
+	public List<ArticleReportDTO> getLaw_article_check() {
+		return law_article_check;
+	}
+	public void setLaw_article_check(List<ArticleReportDTO> law_article_check) {
+		this.law_article_check = law_article_check;
+	}
+	public List<ArticleReportDTO> getJudgment_check() {
+		return judgment_check;
+	}
+	public void setJudgment_check(List<ArticleReportDTO> judgment_check) {
+		this.judgment_check = judgment_check;
+	}
+	public String getCourt_name() {
+		return court_name;
+	}
+	public void setCourt_name(String court_name) {
+		this.court_name = court_name;
+	}
+	public String getType_name() {
+		return type_name;
+	}
+	public void setType_name(String type_name) {
+		this.type_name = type_name;
+	}
+	public String getCase_number_name() {
+		return case_number_name;
+	}
+	public void setCase_number_name(String case_number_name) {
+		this.case_number_name = case_number_name;
+	}
+	public String getPlaintiff_name() {
+		return plaintiff_name;
+	}
+	public void setPlaintiff_name(String plaintiff_name) {
+		this.plaintiff_name = plaintiff_name;
+	}
+	public String getDefendant_name() {
+		return defendant_name;
+	}
+	public void setDefendant_name(String defendant_name) {
+		this.defendant_name = defendant_name;
+	}
+	public String getThird_party_name() {
+		return third_party_name;
+	}
+	public void setThird_party_name(String third_party_name) {
+		this.third_party_name = third_party_name;
+	}
+//	public String getCause_name() {
+//		return cause_name;
+//	}
+//	public void setCause_name(String cause_name) {
+//		this.cause_name = cause_name;
+//	}
+	public String getCause_content_name() {
+		return cause_content_name;
+	}
+	public void setCause_content_name(String cause_content_name) {
+		this.cause_content_name = cause_content_name;
+	}
+	public String getPlaintiff_claims_name() {
+		return plaintiff_claims_name;
+	}
+	public void setPlaintiff_claims_name(String plaintiff_claims_name) {
+		this.plaintiff_claims_name = plaintiff_claims_name;
+	}
+	public String getAppeal_name() {
+		return appeal_name;
+	}
+	public void setAppeal_name(String appeal_name) {
+		this.appeal_name = appeal_name;
+	}
+	public String getPlaintiff_quote_name() {
+		return plaintiff_quote_name;
+	}
+	public void setPlaintiff_quote_name(String plaintiff_quote_name) {
+		this.plaintiff_quote_name = plaintiff_quote_name;
+	}
+	public String getAnswer_name() {
+		return answer_name;
+	}
+	public void setAnswer_name(String answer_name) {
+		this.answer_name = answer_name;
+	}
+	public String getReason_name() {
+		return reason_name;
+	}
+	public void setReason_name(String reason_name) {
+		this.reason_name = reason_name;
+	}
+	public String getLaw_article_name() {
+		return law_article_name;
+	}
+	public void setLaw_article_name(String law_article_name) {
+		this.law_article_name = law_article_name;
+	}
+	public String getJudgment_description_name() {
+		return judgment_description_name;
+	}
+	public void setJudgment_description_name(String judgment_description_name) {
+		this.judgment_description_name = judgment_description_name;
+	}
+	public String getJudgment_content_name() {
+		return judgment_content_name;
+	}
+	public void setJudgment_content_name(String judgment_content_name) {
+		this.judgment_content_name = judgment_content_name;
+	}
+	public String getRights_obligations_name() {
+		return rights_obligations_name;
+	}
+	public void setRights_obligations_name(String rights_obligations_name) {
+		this.rights_obligations_name = rights_obligations_name;
+	}
+	public String getTrial_group_name() {
+		return trial_group_name;
+	}
+	public void setTrial_group_name(String trial_group_name) {
+		this.trial_group_name = trial_group_name;
+	}
+	public String getAppendix_law_article_name() {
+		return appendix_law_article_name;
+	}
+	public void setAppendix_law_article_name(String appendix_law_article_name) {
+		this.appendix_law_article_name = appendix_law_article_name;
+	}
+	public String getAppeal_check_name() {
+		return appeal_check_name;
+	}
+	public void setAppeal_check_name(String appeal_check_name) {
+		this.appeal_check_name = appeal_check_name;
+	}
+	public String getLaw_article_check_name() {
+		return law_article_check_name;
+	}
+	public void setLaw_article_check_name(String law_article_check_name) {
+		this.law_article_check_name = law_article_check_name;
+	}
+	public String getJudgment_check_name() {
+		return judgment_check_name;
+	}
+	public void setJudgment_check_name(String judgment_check_name) {
+		this.judgment_check_name = judgment_check_name;
+	}
+	
+}

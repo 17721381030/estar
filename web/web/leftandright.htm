@@ -1,0 +1,35 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh-CN">
+	<head>
+		<title></title>
+		<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+		<meta name="keywords" content="" />
+		<meta name="description" content="" />
+		<meta name="author" content="" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta http-equiv="cache-control" content="private" />
+		<meta http-equiv="Content-Type" content="text/html;charset=gb2312"/>
+		<link href="css/main.css" rel="stylesheet" type="text/css" />
+		<script type="text/javascript">
+			function arrowClick() {
+				var arrow = document.getElementById("arrow");
+				var frameset = parent.document.getElementById("left-right");
+				if (arrow.className.toLowerCase() === "left_blank_right") {
+					arrow.className = "left_blank_left";
+					frameset.cols = "0,30,*";
+				} else {
+					arrow.className = "left_blank_right";
+					frameset.cols = "210,30,*";
+				}
+			}
+		</script>
+		<style type="text/css">
+			html, body{padding: 0px;margin: 0px;border: 0px;outline: 0px;}
+			html {_width: 100%; _height: 100%;}
+			body {_width: 100%; _height: 100%;background: url(images/leftandright.png) repeat-y #f2f2f2;}
+		</style>
+	</head>
+	<body style="cursor:pointer;" onclick="arrowClick();">
+		<div id="arrow" class="left_blank_right"></div>
+	</body>
+</html>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-module
+  type="WEB"
+  name="web"
+  id="myeclipse.1388473701497"
+  context-root="/law"
+  j2ee-spec="1.4"
+  archive="web.war">
+  <attributes>
+    <attribute name="webrootdir" value="/web" />
+  </attributes>
+</project-module>
+

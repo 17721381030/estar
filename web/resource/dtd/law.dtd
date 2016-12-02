@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!NOTATION LAW PUBLIC
+           "-//Law//DTD Law//EN">
+
+<!ELEMENT law-config (law*) >
+ 	<!ELEMENT law EMPTY >
+		<!ATTLIST law name CDATA #REQUIRED >
+		<!ATTLIST law valid (true|false) "true" >
+
+           

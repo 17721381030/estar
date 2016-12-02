@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!NOTATION TEXT-PROCESS-RULE PUBLIC
+           "-//TextUtil//DTD Text Process Rule//EN">
+
+<!ELEMENT text-process-rule-config (match-rule*, replace-rule*, synonym-rule*, insensitive-rule*) >
+ 	<!ELEMENT match-rule (exception*) >
+		<!ATTLIST match-rule name CDATA #IMPLIED >
+		<!ATTLIST match-rule disable (true|false) "false" >
+		<!ATTLIST match-rule regex CDATA #REQUIRED >
+		<!ATTLIST match-rule comment CDATA #IMPLIED >
+		<!ELEMENT exception (#PCDATA) >
+ 	<!ELEMENT replace-rule (original, replacement) >
+		<!ATTLIST replace-rule name CDATA #IMPLIED >
+		<!ATTLIST replace-rule disable (true|false) "false" >
+		<!ATTLIST replace-rule type (error|warning|normal) "normal" >
+	 	<!ELEMENT original (exception*) >
+			<!ATTLIST original regex CDATA #REQUIRED >
+		<!ELEMENT replacement (subrule*) >
+			<!ATTLIST replacement text CDATA #IMPLIED >
+			<!ATTLIST replacement prefix CDATA #IMPLIED >
+			<!ATTLIST replacement suffix CDATA #IMPLIED >
+			<!ELEMENT subrule (#PCDATA) >
+	<!ELEMENT synonym-rule (synonym*, insensitive?) >
+		<!ATTLIST synonym-rule name CDATA #IMPLIED >
+		<!ATTLIST synonym-rule word CDATA #REQUIRED >
+		<!ELEMENT synonym (#PCDATA) >
+		<!ELEMENT insensitive (word*) >
+			<!ATTLIST insensitive name CDATA #IMPLIED >
+			<!ATTLIST insensitive extend CDATA #IMPLIED >
+			<!ELEMENT word (#PCDATA) >
+	<!ELEMENT insensitive-rule (word*) >
+		<!ATTLIST insensitive-rule name CDATA #IMPLIED >
+		<!ATTLIST insensitive-rule extend CDATA #IMPLIED >
+		

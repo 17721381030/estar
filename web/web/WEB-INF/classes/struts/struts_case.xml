@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+	
+	<package name="case" namespace="/" extends="struts-default,json-default,base_struts">
+		
+		<action name="case_*" class="com.estar.judgment.evaluation.web.law.action.CaseSearchAction" method="{1}">
+			<result type="dispatcher" name="search">/jsp/case/relateViewFrame.jsp</result>
+			<result type="dispatcher" name="caseList">/jsp/case/caseList.jsp</result>
+			
+		</action>
+		
+		<action name="analysis_*" class="com.estar.judgment.evaluation.web.law.action.AnalysisArticleAction" method="{1}">
+			<result type="dispatcher" name="detail">/jsp/case/analysisArticle.jsp</result>
+		</action>
+		
+		<action name="batchAnalysis_*" class="com.estar.judgment.evaluation.web.law.action.BatchAnalysisArticleAction" method="{1}">
+			<result type="dispatcher" name="list">/jsp/case/batchAnalysisList.jsp</result>
+			<result type="dispatcher" name="edit">/jsp/case/batchAnalysisArticle.jsp</result>
+			<result type="dispatcher" name="edit2">/jsp/case/caseArticle.jsp</result>
+		</action>
+		
+		<action name="batchEvaluate_*" class="com.estar.judgment.evaluation.web.law.action.BatchEvaluateAction" method="{1}">
+			<result type="dispatcher" name="list">/jsp/case/batchEvaluateList.jsp</result>
+			<result type="dispatcher" name="edit">/jsp/case/batchEvaluateArticle.jsp</result>
+		</action>
+		
+		<action name="statistics_*" class="com.estar.judgment.evaluation.web.law.action.StatisticsAction" method="{1}">
+			<result type="dispatcher" name="list">/jsp/case/statisticsList.jsp</result>
+			<result type="dispatcher" name="edit">/jsp/case/statisticsArticle.jsp</result>
+		</action>
+		<action name="modifyCheckerProcessors_*" class="com.estar.judgment.evaluation.web.law.action.ModifyCheckerProcessorsAction" method="{1}">
+			<result type="dispatcher" name="list">/jsp/case/modifyJudgmentProcessorsList.jsp</result>
+		</action>
+		
+		<action name="echartsAnalysis_*" class="com.estar.judgment.evaluation.web.law.action.EchartsAnalysisAction" method="{1}">
+			<result type="dispatcher" name="list">/jsp/case/echartsAnaylysis.jsp</result>
+		</action>
+		
+	</package>
+</struts>

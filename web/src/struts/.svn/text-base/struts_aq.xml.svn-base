@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC  "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN" "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+	
+	<package name="default" namespace="/" extends="struts-default,json-default,base_struts">
+	
+	
+		<action name="module_*" class="com.estar.judgment.evaluation.web.security.web.action.ModuleAction" method="{1}">
+	 		<result type="dispatcher" name="detail">/jsp/security/module_edit.jsp</result>
+	 		<result type="dispatcher" name="list">/jsp/security/module_list.jsp</result>
+	 		<result type="chain" name="delete">module_list</result>
+	 	</action>
+	 	
+	 	<action name="operate_*" class="com.estar.judgment.evaluation.web.security.web.action.OperateAction" method="{1}">
+	 		<result type="dispatcher" name="detail">/jsp/security/operate_edit.jsp</result>
+	 		<result type="dispatcher" name="list">/jsp/security/operate_list.jsp</result>
+	 		<result type="chain" name="delete">operate_list</result>
+	 	</action>
+	 	
+	 	<action name="user_*" class="com.estar.judgment.evaluation.web.security.web.action.UserAction" method="{1}">
+	 		<result type="dispatcher" name="detail">/jsp/security/user_edit.jsp</result>
+	 		<result type="dispatcher" name="list">/jsp/security/user_list.jsp</result>
+	 		<result type="chain" name="delete">user_list</result>
+	 		<result type="dispatcher" name="passwd">/jsp/common/user_pawd.jsp</result>
+	 		<result type="dispatcher" name="user_info">/jsp/security/user_info.jsp</result>
+	 	</action>
+	 	
+	 	<action name="org_*" class="com.estar.judgment.evaluation.web.security.web.action.OrgAction" method="{1}">
+	 		<result type="dispatcher" name="org_manage">/jsp/security/org_manage.jsp</result>
+	 	</action>
+
+	 	
+	 	<action name="securityCode" class="com.estar.judgment.evaluation.web.frame.action.SecurityCodeImageAction">
+	        <result name="success" type="stream">
+	            <param name="contentType">image/jpeg</param>
+	            <param name="inputName">imageStream</param>
+	            <param name="bufferSize">2048</param>
+	        </result>
+	    </action>
+	</package>
+</struts>

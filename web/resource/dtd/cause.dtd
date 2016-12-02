@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!NOTATION LAW PUBLIC
+           "-//Cause//DTD Cause//EN">
+
+<!ELEMENT cause-config (cause*) >
+ 	<!ELEMENT cause EMPTY >
+		<!ATTLIST cause name CDATA #REQUIRED >
+		<!ATTLIST cause id CDATA #IMPLIED >
+
+           

@@ -1,0 +1,24 @@
+
+#article_content{
+	float:left;
+	margin-left:10px;
+	margin-top:15px;
+	margin-bottom:15px;
+	background: #ececec;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+}
+
+#article_menu{
+	float:left;
+	margin-left:15px;
+	margin-top:10px;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+}
+
+#tabs_splic{
+	margin-top:5px;
+}

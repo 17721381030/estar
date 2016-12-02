@@ -1,0 +1,90 @@
+
+#article_content{
+	float:left;
+	margin-left:10px;
+	margin-top:15px;
+	margin-bottom:15px;
+	background: #ececec;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+}
+
+#article_menuas{
+	float:left;
+	margin-left:15px;
+	margin-top:10px;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+}
+
+#tabs_splic{
+	margin-top:5px;
+}
+
+#article_menu_content{
+	float: left;
+}
+
+#bottom_button_content{
+	padding-right:12px;
+	height:100px;
+	text-align:right;
+	background:#f4f4f4;
+	float:right;
+	padding-bottom:25px;
+	
+}
+
+#textEditorButton{
+	background:#ed7d2e;
+	border-radius: 5px;
+	font-size:14px;
+	color:#fff;
+	font-family:΢微软雅黑;
+	width: 125px;
+	height: 32px;
+	text-align: center;
+	border:none;
+	cursor: pointer;
+}
+
+#exportButton{
+	background:#ed7d2e;
+	border-radius: 5px;
+	font-size:14px;
+	color:#fff;
+	font-family:΢微软雅黑;
+	width: 125px;
+	height: 32px;
+	text-align: center;
+	border:none;
+	cursor: pointer;
+}
+
+#returnUpperButton{
+	background:#ed7d2e;
+	border-radius: 5px;
+	font-size:14px;
+	color:#fff;
+	font-family:΢微软雅黑;
+	width: 125px;
+	height: 32px;
+	text-align: center;
+	border:none;
+	cursor: pointer;
+}
+
+#analysisButton{
+	background:#36B0C8;
+	border-radius: 5px;
+	font-size:14px;
+	color:#fff;
+	font-family:΢微软雅黑;
+	width: 125px;
+	height: 32px;
+	text-align: center;
+	border:none;
+	cursor: pointer;
+}

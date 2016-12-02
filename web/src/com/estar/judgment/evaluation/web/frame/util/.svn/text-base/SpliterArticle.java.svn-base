@@ -1,0 +1,10 @@
+package com.estar.judgment.evaluation.web.frame.util;
+
+import com.estar.common.textutil.TextProcessor;
+import com.estar.judgment.evaluation.JudgmentProcessorFactory;
+
+public class SpliterArticle {
+	public TextProcessor getTextProcessor(){
+		return JudgmentProcessorFactory.getJudgmentInfoProcessor();
+	}
+}
